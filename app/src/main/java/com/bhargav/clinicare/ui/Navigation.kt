@@ -11,6 +11,8 @@ import com.google.accompanist.navigation.animation.composable
 sealed class Routes(open val route: String) {
     object Login : Routes("login")
     object Register : Routes("register")
+    object Home : Routes("home")
+
 }
 
 @ExperimentalAnimationApi
@@ -28,6 +30,12 @@ fun Navigation(navHostController: NavHostController) {
         // register
         composable(
             route = Routes.Register.route,
+            content = { RegisterScreen(navController = navHostController) },
+        )
+
+        // home
+        composable(
+            route = Routes.Home.route,
             content = { RegisterScreen(navController = navHostController) },
         )
     }
