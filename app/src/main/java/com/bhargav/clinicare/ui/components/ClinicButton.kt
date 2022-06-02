@@ -23,7 +23,7 @@ fun ClinicButton(
     Button(
         modifier = modifier
             .fillMaxWidth()
-            .height(52.dp),
+            .height(54.dp),
         enabled = enabled,
         shape = MaterialTheme.shapes.medium,
         elevation = null,

@@ -3,6 +3,7 @@ package com.bhargav.clinicare.ui
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.bhargav.clinicare.ui.screens.home.HomeScreen
 import com.bhargav.clinicare.ui.screens.login.LoginScreen
 import com.bhargav.clinicare.ui.screens.register.RegisterScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost

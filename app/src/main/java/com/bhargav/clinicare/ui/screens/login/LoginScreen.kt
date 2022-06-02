@@ -1,17 +1,14 @@
 package com.bhargav.clinicare.ui.screens.login
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +23,8 @@ import com.bhargav.pocket.commons.components.ClinicButton
 @Composable
 fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
 
     Column(
         modifier = Modifier
@@ -43,18 +42,49 @@ fun LoginScreen(navController: NavController) {
             fontSize = 14.sp,
             style = TextStyle(color = DarkGreen)
         )
-
-        Spacer(modifier = Modifier.padding(top = 36.dp))
+        Box(
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .padding(28.dp)
+                .size(290.dp)
+                .background(Color.LightGray)
+        )
 
         ClinicTextField(
             label = "Email",
             onValueChanged = { email = it }
         )
+        ClinicTextField(
+            label = "Password",
+            onValueChanged = { password = it }
+        )
+        Row(
+            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End,
 
+        ) {
+            Text(
+                text = "Forgot password?",
+                style = TextStyle(color = DarkGreen)
+            )
+
+        }
+        
         ClinicButton(
             text = "Login",
             color = Green,
             modifier = Modifier.clip(shape = RoundedCornerShape(12.dp))
+        )
+
+        Text(
+            buildAnnotatedString {
+                withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
+                    append("New user? ")
+                    withStyle(style = SpanStyle(color = DarkGreen, fontWeight = FontWeight.Bold)) {
+                        append("Register ")
+                    }
+                    append("now")
+                }
+            }
         )
     }
 }
