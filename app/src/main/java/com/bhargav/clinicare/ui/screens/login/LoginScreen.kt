@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
 import com.bhargav.clinicare.ui.theme.DarkGreen
 import com.bhargav.clinicare.ui.theme.Green
-import com.bhargav.pocket.commons.components.ClinicButton
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -42,10 +42,10 @@ fun LoginScreen(navController: NavController) {
             fontSize = 14.sp,
             style = TextStyle(color = DarkGreen)
         )
+
         Box(
             modifier = Modifier
-                .padding(top = 20.dp)
-                .padding(28.dp)
+                .padding(24.dp)
                 .size(290.dp)
                 .background(Color.LightGray)
         )
@@ -59,33 +59,45 @@ fun LoginScreen(navController: NavController) {
             onValueChanged = { password = it }
         )
         Row(
-            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End,
-
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
         ) {
             Text(
                 text = "Forgot password?",
-                style = TextStyle(color = DarkGreen)
+                fontWeight = FontWeight.SemiBold,
+                color = DarkGreen
             )
-
         }
-        
+
         ClinicButton(
             text = "Login",
             color = Green,
-            modifier = Modifier.clip(shape = RoundedCornerShape(12.dp))
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .clip(shape = RoundedCornerShape(12.dp))
         )
 
-        Text(
-            buildAnnotatedString {
-                withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
-                    append("New user? ")
-                    withStyle(style = SpanStyle(color = DarkGreen, fontWeight = FontWeight.Bold)) {
-                        append("Register ")
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                buildAnnotatedString {
+                    withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
+                        append("New user? ")
+                        withStyle(
+                            style = SpanStyle(
+                                color = DarkGreen,
+                                fontWeight = FontWeight.Bold
+                            )
+                        ) {
+                            append("Register ")
+                        }
+                        append("now")
                     }
-                    append("now")
                 }
-            }
-        )
+            )
+        }
     }
 }
 

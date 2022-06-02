@@ -1,29 +1,27 @@
 package com.bhargav.clinicare.ui.screens.register
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.bhargav.clinicare.ui.Routes
+import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
-import com.bhargav.clinicare.ui.theme.DarkGreen
 import com.bhargav.clinicare.ui.theme.Green
-import com.bhargav.pocket.commons.components.ClinicButton
 
 @Composable
 fun AboutYouScreen(navController: NavController) {
@@ -48,11 +46,6 @@ fun AboutYouScreen(navController: NavController) {
             fontSize = 14.sp,
             style = TextStyle(color = Color.Black)
         )
-        Box(
-            modifier = Modifier
-                .padding(4.dp)
-                .size(250.dp)
-        )
 
         ClinicTextField(
             label = "Name",
@@ -63,28 +56,15 @@ fun AboutYouScreen(navController: NavController) {
             onValueChanged = { phone = it }
         )
 
-        Row() {
-
-            Column(
-                Modifier
-                    .padding(1.dp)
-                    .size(57.dp)
-                    .weight(1f)
-            ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
                 ClinicTextField(
                     label = "Gender",
                     onValueChanged = { gender = it }
-
                 )
             }
 
-            Column(
-                Modifier
-                    .padding(1.dp)
-                    .size(57.dp)
-                    .weight(1f)
-
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 ClinicTextField(
                     label = "Birthday",
                     onValueChanged = { birthday = it }
@@ -92,36 +72,34 @@ fun AboutYouScreen(navController: NavController) {
             }
         }
 
-
-
-
-
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 80.dp, start = 3.dp, end = 3.dp)
+                .padding(top = 54.dp)
         ) {
 
             ClinicButton(
                 text = "Next",
                 color = Green,
-                modifier = Modifier.clip(shape = RoundedCornerShape(12.dp))
+                modifier = Modifier.clip(shape = RoundedCornerShape(16.dp))
             )
-            Text(
-                text = "Your data is safe and secure with us.",
+
+            Row(
                 modifier = Modifier
-                    .size(300.dp)
-                    .padding(8.dp),
-                textAlign = TextAlign.Center,
-                fontSize = 12.sp,
-                style = TextStyle(color = Color.Black)
-            )
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Outlined.Lock, contentDescription = "lock")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Your data is safe and secure with us.",
+                    style = MaterialTheme.typography.body2
+                )
+            }
         }
-
-
     }
-
 }
 
 

@@ -3,7 +3,6 @@ package com.bhargav.clinicare.ui.screens.register
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -16,11 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.bhargav.clinicare.ui.Routes
+import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
 import com.bhargav.clinicare.ui.theme.DarkGreen
 import com.bhargav.clinicare.ui.theme.Green
-import com.bhargav.pocket.commons.components.ClinicButton
 
 @Composable
 fun RegisterScreen(navController: NavController) {

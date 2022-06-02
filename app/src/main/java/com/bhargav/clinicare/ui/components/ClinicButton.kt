@@ -1,4 +1,4 @@
-package com.bhargav.pocket.commons.components
+package com.bhargav.clinicare.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

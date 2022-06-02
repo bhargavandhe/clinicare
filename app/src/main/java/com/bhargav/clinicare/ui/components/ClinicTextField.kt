@@ -2,6 +2,7 @@ package com.bhargav.clinicare.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -45,7 +46,7 @@ fun ClinicTextField(
                 textFieldValue = it
                 onValueChanged(it)
             },
-            shape = MaterialTheme.shapes.medium,
+            shape = RoundedCornerShape(8.dp),
             colors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
