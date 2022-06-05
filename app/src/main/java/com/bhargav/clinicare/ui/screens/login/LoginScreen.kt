@@ -1,11 +1,14 @@
 package com.bhargav.clinicare.ui.screens.login
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,17 +22,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.bhargav.clinicare.data.Repository
+import com.bhargav.clinicare.ui.Routes
 import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
 import com.bhargav.clinicare.ui.theme.DarkGreen
 import com.bhargav.clinicare.ui.theme.Green
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+
+private const val TAG = "LoginScreen"
+private const val NO_SUCH_EMAIL =
+    "There is no user record corresponding to this identifier. The user may have been deleted."
+private const val INVALID_PASSWORD = "The password is invalid or the user does not have a password."
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+
+    val viewModel: LoginViewModel = viewModel()
+    val scope = rememberCoroutineScope()
 
     ConstraintLayout(
         modifier = Modifier
@@ -66,12 +80,16 @@ fun LoginScreen(navController: NavController) {
 
             ClinicTextField(
                 label = "Email",
-                onValueChanged = { email = it }
+                value = viewModel.email,
+                onValueChanged = { viewModel.email = it },
+                errorText = viewModel.emailError
             )
 
             ClinicTextField(
                 label = "Password",
-                onValueChanged = { password = it }
+                value = viewModel.password,
+                onValueChanged = { viewModel.password = it },
+                errorText = viewModel.passwordError
             )
 
             Row(
@@ -80,8 +98,9 @@ fun LoginScreen(navController: NavController) {
             ) {
                 Text(
                     text = "Forgot password?",
-                    fontWeight = FontWeight.SemiBold,
-                    color = DarkGreen
+                    style = MaterialTheme.typography.body2,
+                    color = DarkGreen,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
         }
@@ -101,7 +120,24 @@ fun LoginScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .clip(shape = RoundedCornerShape(12.dp)),
-                onClick = { }
+                onClick = {
+                    if (viewModel.email != "" && viewModel.password != "")
+                        scope.launch {
+                            val auth = FirebaseAuth.getInstance()
+                            auth.signInWithEmailAndPassword(viewModel.email.trim(), viewModel.password)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "LoginScreen: Success")
+                                    Repository.getInstance().init()
+                                    navController.navigate(Routes.Home.route)
+                                }.addOnFailureListener {
+                                    when (it.message) {
+                                        NO_SUCH_EMAIL -> viewModel.emailError = "Email not registered!"
+                                        INVALID_PASSWORD -> viewModel.passwordError = "Invalid password!"
+                                        else -> Log.d(TAG, "LoginScreen: ${it.message}")
+                                    }
+                                }
+                        }
+                }
             )
 
             Text(
@@ -111,11 +147,15 @@ fun LoginScreen(navController: NavController) {
                         withStyle(
                             style = SpanStyle(
                                 color = DarkGreen,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.SemiBold
                             ), block = { append("Register ") }
                         )
                         append("now")
                     }
+                },
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier.clickable {
+                    navController.navigate(Routes.Register.route)
                 }
             )
         }

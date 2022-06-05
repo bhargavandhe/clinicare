@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "863768114797",
+    "project_id": "clinicare-89a9f",
+    "storage_bucket": "clinicare-89a9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863768114797:android:c72d01278950f76e89f164",
+        "android_client_info": {
+          "package_name": "com.bhargav.clinicare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863768114797-ubippnu2g22rms2sp9r3sh11n44j746h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0qUdW1hhsdyOlJ0D_nLU3P3AnufpvGo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863768114797-ubippnu2g22rms2sp9r3sh11n44j746h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,10 +2,7 @@ package com.bhargav.clinicare.ui.screens.onBoarding
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -17,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.bhargav.clinicare.ui.Routes
 import com.bhargav.clinicare.ui.theme.Green
 
 @Composable
@@ -59,17 +57,20 @@ fun OnBoardingScreen(navController: NavController) {
         ) {
             Text(
                 text = "Login or Register to continue",
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.body2,
                 color = Color.White
             )
 
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 4.dp),
+                    .padding(vertical = 8.dp)
+                    .height(48.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 shape = CircleShape,
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate(Routes.Login.route)
+                },
             ) {
                 Text(
                     text = "login".uppercase(),
@@ -79,8 +80,12 @@ fun OnBoardingScreen(navController: NavController) {
             }
 
             OutlinedButton(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                onClick = {
+                    navController.navigate(Routes.Register.route)
+                },
                 border = BorderStroke(width = 1.dp, color = Color.White),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
                 shape = CircleShape

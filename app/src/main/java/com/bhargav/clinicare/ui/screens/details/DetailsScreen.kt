@@ -33,33 +33,36 @@ import com.bhargav.clinicare.ui.theme.Green
 @Composable
 fun DetailsScreen(navController: NavController) {
     val hospitalName = "CNS Hospital"
-    Column(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        ClinicHeader(
-            modifier = Modifier.padding(24.dp),
-            title = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(text = hospitalName, style = MaterialTheme.typography.h6)
-                    Icon(
-                        imageVector = Icons.Rounded.Verified,
-                        contentDescription = "verified",
-                        tint = Green
-                    )
-                }
-            },
-            actions = {
-                Row {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Rounded.Star, contentDescription = "favorite")
-                    }
+
+    ClinicHeader(
+        modifier = Modifier.padding(24.dp),
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(text = hospitalName, style = MaterialTheme.typography.h6)
+                Icon(
+                    imageVector = Icons.Rounded.Verified,
+                    contentDescription = "verified",
+                    tint = Green
+                )
+            }
+        },
+        actions = {
+            Row {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Rounded.Star, contentDescription = "favorite")
                 }
             }
-        )
+        }
+    )
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(state = rememberScrollState()),
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -87,7 +90,6 @@ fun AboutSection(hospitalName: String, address: String, aboutHospital: String) {
                 .constrainAs(layout) {
                     top.linkTo(parent.top)
                 }
-                .verticalScroll(state = rememberScrollState())
         ) {
             Text(text = hospitalName, style = MaterialTheme.typography.h6)
 

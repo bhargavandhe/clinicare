@@ -38,6 +38,7 @@ fun ClinicTextField(
                 .fillMaxWidth()
                 .height(64.dp),
             value = textFieldValue,
+            textStyle = MaterialTheme.typography.body2,
             enabled = enabled,
             label = { Text(text = label) },
             placeholder = { Text(text = placeholder) },

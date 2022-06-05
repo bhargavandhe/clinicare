@@ -1,5 +1,8 @@
 package com.bhargav.clinicare.ui.screens.register
 
+import android.net.Uri
+import android.os.Bundle
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,16 +23,30 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.bhargav.clinicare.model.Gender
+import com.bhargav.clinicare.model.User
 import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
 import com.bhargav.clinicare.ui.theme.Green
+import com.google.gson.Gson
+
+private const val TAG = "AboutYouScreen"
 
 @Composable
-fun AboutYouScreen(navController: NavController) {
+fun AboutYouScreen(navController: NavController, navArgs: Bundle?) {
+
+    val decoded = Uri.decode(navArgs?.getString("credentials"))
+    val credentials = Gson().fromJson<Map<String, String>>(decoded, Map::class.java)
+
+    val email = credentials["email"]!!
+    val password = credentials["password"]!!
+
     var name by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var gender by remember { mutableStateOf("") }
     var birthday by remember { mutableStateOf("") }
+    var height by remember { mutableStateOf("") }
+    var weight by remember { mutableStateOf("") }
 
     ConstraintLayout(
         modifier = Modifier
@@ -72,11 +89,13 @@ fun AboutYouScreen(navController: NavController) {
 
             ClinicTextField(
                 label = "Name",
+                value = name,
                 onValueChanged = { name = it }
             )
 
             ClinicTextField(
                 label = "Phone",
+                value = phone,
                 onValueChanged = { phone = it }
             )
 
@@ -84,6 +103,7 @@ fun AboutYouScreen(navController: NavController) {
                 Column(modifier = Modifier.weight(1f)) {
                     ClinicTextField(
                         label = "Gender",
+                        value = gender,
                         onValueChanged = { gender = it }
                     )
                 }
@@ -91,7 +111,26 @@ fun AboutYouScreen(navController: NavController) {
                 Column(modifier = Modifier.weight(1f)) {
                     ClinicTextField(
                         label = "Birthday",
+                        value = birthday,
                         onValueChanged = { birthday = it }
+                    )
+                }
+            }
+
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    ClinicTextField(
+                        label = "Height",
+                        value = height,
+                        onValueChanged = { height = it }
+                    )
+                }
+
+                Column(modifier = Modifier.weight(1f)) {
+                    ClinicTextField(
+                        label = "Weight",
+                        value = weight,
+                        onValueChanged = { weight = it }
                     )
                 }
             }
@@ -106,7 +145,19 @@ fun AboutYouScreen(navController: NavController) {
             ClinicButton(
                 text = "Next",
                 color = Green,
-                modifier = Modifier.clip(shape = RoundedCornerShape(16.dp))
+                modifier = Modifier.clip(shape = RoundedCornerShape(16.dp)),
+                onClick = {
+                    val user = User(
+                        name = name,
+                        email = email,
+                        phone = phone,
+                        gender = Gender.MALE,
+                        birthday = birthday,
+                        height = height.toLongOrNull() ?: 0L,
+                        weight = weight.toLongOrNull() ?: 0L,
+                    )
+                    Log.d(TAG, "AboutYouScreen: $user")
+                }
             )
 
             Row(
@@ -131,5 +182,5 @@ fun AboutYouScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun AboutYouScreenPreview() {
-    AboutYouScreen(navController = rememberNavController())
+    AboutYouScreen(navController = rememberNavController(), navArgs = null)
 }

@@ -35,19 +35,19 @@ val Typography = Typography(
     ),
     h4 = TextStyle(
         fontFamily = dmSans,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         letterSpacing = (0.25).sp
     ),
     h5 = TextStyle(
         fontFamily = dmSans,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
     ),
     h6 = TextStyle(
         fontFamily = dmSans,
-        fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
         letterSpacing = (0.15).sp
     ),
     subtitle1 = TextStyle(
@@ -66,13 +66,13 @@ val Typography = Typography(
     body1 = TextStyle(
         fontFamily = dmSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
+        fontSize = 20.sp,
         letterSpacing = (0.5).sp
     ),
     body2 = TextStyle(
         fontFamily = dmSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
         letterSpacing = (0.25).sp
     ),
     button = TextStyle(

@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.bhargav.clinicare.ui.Routes
 import com.bhargav.clinicare.ui.components.ClinicButton
 import com.bhargav.clinicare.ui.components.ClinicTextField
 import com.bhargav.clinicare.ui.theme.DarkGreen
@@ -30,6 +31,7 @@ import com.bhargav.clinicare.ui.theme.Green
 fun RegisterScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
 
     ConstraintLayout(
         modifier = Modifier
@@ -68,17 +70,20 @@ fun RegisterScreen(navController: NavController) {
 
             ClinicTextField(
                 label = "Email",
+                value = email,
                 onValueChanged = { email = it }
             )
 
             ClinicTextField(
                 label = "Create password",
+                value = password,
                 onValueChanged = { password = it }
             )
 
             ClinicTextField(
                 label = "Confirm password",
-                onValueChanged = { password = it }
+                value = confirmPassword,
+                onValueChanged = { confirmPassword = it }
             )
         }
 
@@ -97,7 +102,11 @@ fun RegisterScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 16.dp)
                     .clip(shape = RoundedCornerShape(12.dp)),
-                onClick = { }
+                onClick = {
+                    if (email != "" && password != "" && confirmPassword != "" && password == confirmPassword) {
+                        navController.navigate(Routes.AboutYou.passEmailAndPassword(email, password))
+                    }
+                }
             )
 
             Text(
@@ -111,7 +120,8 @@ fun RegisterScreen(navController: NavController) {
                             ), block = { append("Login ") }
                         )
                     }
-                }
+                },
+                style = MaterialTheme.typography.body2
             )
         }
     }
