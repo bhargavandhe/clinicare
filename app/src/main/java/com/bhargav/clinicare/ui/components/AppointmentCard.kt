@@ -32,7 +32,7 @@ fun AppointmentCard(
 ) {
     ConstraintLayout(
         modifier = Modifier
-            .size(height = 200.dp, width = 180.dp)
+            .size(height = 200.dp, width = 164.dp)
             .clip(shape = RoundedCornerShape(16.dp))
             .clickable { onClick.invoke() }
             .background(color = if (isPrimary) DarkGreen else Color(0xFFE9E9E9))

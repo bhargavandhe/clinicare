@@ -1,6 +1,9 @@
 package com.bhargav.clinicare.ui.screens.register
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -12,11 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.bhargav.clinicare.ui.components.ClinicButton
@@ -30,54 +31,78 @@ fun AboutYouScreen(navController: NavController) {
     var gender by remember { mutableStateOf("") }
     var birthday by remember { mutableStateOf("") }
 
-    Column(
+    ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 124.dp, start = 42.dp, end = 42.dp)
+            .padding(32.dp)
     ) {
-        Text(
-            text = "About you",
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            style = TextStyle(color = Green)
-        )
-        Text(
-            text = "Enter your basic details",
-            fontSize = 14.sp,
-            style = TextStyle(color = Color.Black)
-        )
+        val (layout, button) = createRefs()
 
-        ClinicTextField(
-            label = "Name",
-            onValueChanged = { name = it }
-        )
-        ClinicTextField(
-            label = "Phone",
-            onValueChanged = { phone = it }
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .constrainAs(layout) {
+                    top.linkTo(parent.top, margin = 72.dp)
+                }
+        ) {
+            Text(
+                text = "About you",
+                style = MaterialTheme.typography.h5,
+                color = Green
+            )
+            Text(
+                text = "Enter your basic details",
+                style = MaterialTheme.typography.body2
+            )
 
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            Column(modifier = Modifier.weight(1f)) {
-                ClinicTextField(
-                    label = "Gender",
-                    onValueChanged = { gender = it }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(48.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(152.dp)
+                        .clip(shape = CircleShape)
+                        .background(color = Color.LightGray)
+                        .clickable { }
                 )
             }
 
-            Column(modifier = Modifier.weight(1f)) {
-                ClinicTextField(
-                    label = "Birthday",
-                    onValueChanged = { birthday = it }
-                )
+            ClinicTextField(
+                label = "Name",
+                onValueChanged = { name = it }
+            )
+
+            ClinicTextField(
+                label = "Phone",
+                onValueChanged = { phone = it }
+            )
+
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    ClinicTextField(
+                        label = "Gender",
+                        onValueChanged = { gender = it }
+                    )
+                }
+
+                Column(modifier = Modifier.weight(1f)) {
+                    ClinicTextField(
+                        label = "Birthday",
+                        onValueChanged = { birthday = it }
+                    )
+                }
             }
         }
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 54.dp)
+                .constrainAs(button) {
+                    bottom.linkTo(parent.bottom)
+                }
         ) {
-
             ClinicButton(
                 text = "Next",
                 color = Green,

@@ -11,8 +11,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.Explore
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.Verified
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,9 +39,16 @@ fun DetailsScreen(navController: NavController) {
         ClinicHeader(
             modifier = Modifier.padding(24.dp),
             title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Text(text = hospitalName, style = MaterialTheme.typography.h6)
-                    Icon(imageVector = Icons.Rounded.AccountCircle, contentDescription = "verified")
+                    Icon(
+                        imageVector = Icons.Rounded.Verified,
+                        contentDescription = "verified",
+                        tint = Green
+                    )
                 }
             },
             actions = {
@@ -98,6 +107,12 @@ fun AboutSection(hospitalName: String, address: String, aboutHospital: String) {
                     shape = CircleShape,
                     onClick = { /*TODO*/ },
                 ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Explore,
+                        contentDescription = "",
+                        tint = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Directions".uppercase(),
                         style = MaterialTheme.typography.caption,
@@ -111,6 +126,12 @@ fun AboutSection(hospitalName: String, address: String, aboutHospital: String) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
                     shape = CircleShape
                 ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Call,
+                        contentDescription = "",
+                        tint = Green
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Phone".uppercase(),
                         style = MaterialTheme.typography.caption,
